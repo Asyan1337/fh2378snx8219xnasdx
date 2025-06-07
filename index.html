@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap');
+    
+    /* Новый контейнер для изображения */
+    .pluv-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .pluv-image {
+      max-width: 450px; /* Регулируйте по размеру вашего изображения */
+      max-height: 15000px; /* Регулируйте по размеру вашего изображения */
+      display: block;
+      margin: 0 auto;
+    }
+    
+    /* Обновленные стили для текста */
+    .scripthook-town {
+      padding: 6.5px;
+      display: inline-block;
+      background-color: transparent;
+      color: white; /* Цвет текста */
+      font-family: 'Josefin Sans', sans-serif;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* Стиль для текста */
+    }
+  </style>
+</head>
+<body>
+  <div class="pluv-container">
+    <img src="pluv.png" alt="Scripthook Town" class="pluv-image">
+  </div>
+
+  <div class="background-container"></div>
+
+  <main>
+    <div class="title">
+      <h3 class="scripthook-town">GOMIGRAD.COM</h3>
+      <div id="history"></div>
+    </div>
+  </main>
+
+  <script src="js/lib/jquery-3.4.1.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const images = [
+      "imgs/1.png",
+      "imgs/2.png",
+      "imgs/3.png",
+      "imgs/4.jpg",
+      "imgs/5.png",
+      "imgs/6.png",
+      "imgs/7.png",
+      "imgs/8.png"
+    ];
+    
+    const container = document.querySelector('.background-container');
+    let currentIndex = 0;
+    
+    images.forEach((img, index) => {
+      const imgElement = new Image();
+      imgElement.src = img;
+      imgElement.classList.add('bg-image');
+      if (index === 0) imgElement.classList.add('active');
+      container.appendChild(imgElement);
+    });
+    
+    function changeBackground() {
+      const allImages = document.querySelectorAll('.bg-image');
+      const nextIndex = (currentIndex + 1) % images.length;
+      
+      allImages[currentIndex].classList.remove('active');
+      
+      allImages[nextIndex].classList.add('active');
+      
+      currentIndex = nextIndex;
+    }
+    
+    setInterval(changeBackground, 4000);
+  </script>
+</body>
+</html>
